@@ -8,7 +8,7 @@ npm install interval-queue
 ## Example
 ```javascript
 var IntervalQueue = require('interval-queue');
-var queue = new IntervalQueue(5 * 1000);
+var queue = new IntervalQueue({size: 100, interval: 5 * 1000});
 queue.on('data', function(chunks) {
   console.log(chunks); // -> [{msg: 'sample', time: 1428339082787}, {msg: 'example', time: 1428339111659}]
 });
