@@ -1,35 +1,17 @@
 'use strict';
 
 var IntervalQueue = require('../lib');
-var queue = new IntervalQueue();
+var queue = new IntervalQueue({size: 10, interval: 3000});
 queue.on('data', function(data) {
-  console.log(data);
+  console.log('data', data, queue.length);
 });
-queue.push('test001');
-queue.push('test002');
-queue.push('test003');
+for (var i = 0; i < 30; i++) {
+  queue.push('test' + i);
+}
 setTimeout(function() {
-  queue.push('test101');
-  queue.push('test102');
-  queue.push('test103');
-}, 1000);
-setTimeout(function() {
-  queue.push('test201');
-  queue.push('test202');
-  queue.push('test203');
-}, 2000);
-setTimeout(function() {
-  queue.push('test301');
-  queue.push('test302');
-  queue.push('test303');
+  setImmediate(function() {
+    for (var i = 0; i < 30; i++) {
+      queue.push('test1' + i);
+    }
+  });
 }, 3000);
-setTimeout(function() {
-  queue.push('test401');
-  queue.push('test402');
-  queue.push('test403');
-}, 4000);
-setTimeout(function() {
-  queue.push('test501');
-  queue.push('test502');
-  queue.push('test503');
-}, 5000);
